@@ -2,7 +2,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import CustomerDetail from "./customerDetail";
 import CustomerTable from "./customerTable";
-import DashboardNavbar from "./DashboardNavbar";
+
+import DashboardNavbar from './../DashboardNavbar';
 
 
 function CustomerList() {

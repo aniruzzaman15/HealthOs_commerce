@@ -12,7 +12,7 @@ import {
   ChartValueAxisItem
 } from "@progress/kendo-react-charts";
 
-import { barChartQ4Months, barChartMonthlyPercentages } from "../../lib/data";
+import { barChartQ4Months, barChartMonthlyPercentages } from "../../../lib/data";
 
 export const BarChartContainer = () => (
   <Chart style={{ height: 288 }}>

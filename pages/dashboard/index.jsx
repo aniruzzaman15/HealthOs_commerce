@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 
 import Image from 'next/image'
-import ProductList from '../../components/admin/productList';
+import ProductList from '../../components/admin/Product/productList';
 import Overview from '../../components/admin/Overview';
-import CustomerList from '../../components/admin/customerList';
+import CustomerList from '../../components/admin/Customer/customerList';
 import OrderList from '../../components/admin/Order/orderList';
 
 const sidebar = [

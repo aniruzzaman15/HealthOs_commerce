@@ -8,7 +8,7 @@ import {
   ChartSeriesLabels
 } from "@progress/kendo-react-charts";
 import "@progress/kendo-theme-material/dist/all.css";
-import { donutChartData } from '../../lib/data';
+import { donutChartData } from '../../../lib/data';
 
 /* This function's outputted string determines the label contents */
 const labelTemplate = e => e.category + "\n" + e.value + "%";
