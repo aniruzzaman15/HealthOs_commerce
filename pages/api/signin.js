@@ -1,16 +1,17 @@
 import connect from "../../lib/mongodb.js";
-import User from '../../model/schema.js'
+import User from '../../model/UserSchema.js'
 
 connect()
 
 export default async function handler(req,res){
 
-    const {phone,password,full_name} = req.body
-    const user = await User.findOne({phone,password,full_name})
+    const {phone,password} = req.body
+    const user = await User.findOne({phone,password})
+    console.log('got you', user)
     if(!user){
         return res.json({status:'Not able to find the user'})
     }
     else{
-        res.redirect('/home')
+        res.redirect('/dashboard')
     }
 }

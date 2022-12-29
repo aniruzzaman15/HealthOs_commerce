@@ -1,11 +1,11 @@
 import connect from "../../lib/mongodb";
-import User from '../../model/schema.js'
+import User from '../../model/UserSchema.js'
 
 connect()
 
 export default async function handler(req,res){
     try {
-        console.log(req)
+
 
         const user = await User.create(req.body);
         console.log(user)

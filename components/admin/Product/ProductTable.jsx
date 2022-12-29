@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import CreateItem from "./CreateItem";
+import AddProduct from "./addProduct";
 
 const products = [
   {
@@ -65,7 +65,7 @@ function ProductTable({ selectProductHandler }) {
   };
   return (
     <>
-      {createModal && <CreateItem />}
+      {createModal && <AddProduct setCreateModal={setCreateModal}/>}
       <div className="flex items-center justify-between py-7 px-10">
         <div>
           <h1 className="text-2xl font-semibold leading-relaxed text-gray-800">
