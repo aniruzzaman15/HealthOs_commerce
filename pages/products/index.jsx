@@ -1,4 +1,5 @@
 import React from 'react'
+import Cart from '../../components/cart/Cart'
 import Navbar from '../../components/Navbar/Navbar'
 
 function index() {
@@ -6,7 +7,7 @@ function index() {
     <div>
         <Navbar/>
 
-
+        <Cart/>
     </div>
   )
 }
