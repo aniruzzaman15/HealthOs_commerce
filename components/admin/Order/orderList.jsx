@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardNavbar from './DashboardNavbar'
+import DashboardNavbar from '../DashboardNavbar'
 import OrderTable from './orderTable'
 import { useState } from 'react';
 import OrderDetail from './orderDetail';

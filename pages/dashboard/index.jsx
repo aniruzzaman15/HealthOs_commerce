@@ -5,7 +5,7 @@ import Image from 'next/image'
 import ProductList from '../../components/admin/productList';
 import Overview from '../../components/admin/Overview';
 import CustomerList from '../../components/admin/customerList';
-import OrderList from '../../components/admin/orderList';
+import OrderList from '../../components/admin/Order/orderList';
 
 const sidebar = [
     { name: "Overview", icon: './icons/overview.svg',id:'overview' },
