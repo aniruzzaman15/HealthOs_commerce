@@ -6,7 +6,10 @@ function AddProduct({ setCreateModal }) {
   const [productPrice, setProductPrice] = useState('')
 
   const addProductHandler = async () => {
-    const result  = await fetch('/api/addProduct', {
+
+    let dateTime = new Date().toISOString().slice(0, 10)
+
+    await fetch('/api/addProduct', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -14,8 +17,9 @@ function AddProduct({ setCreateModal }) {
       },
       body: JSON.stringify({
         product_name:productName,
-        product_thumbnail:'hahaha',
-        product_price:productPrice
+        product_thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDYFhn-eUDhXP0mAvpDanf8Q3_PRz1BqpUfw&usqp=CAU',
+        product_price:productPrice,
+        dateTime
 
       })
     })

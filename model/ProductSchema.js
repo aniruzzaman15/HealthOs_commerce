@@ -14,6 +14,10 @@ const productSchema = new mongoose.Schema({
     product_price:{
         type:String,
         required:true
+    },
+    dateTime:{
+        type:String,
+
     }
 })
 

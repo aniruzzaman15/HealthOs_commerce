@@ -1,12 +1,14 @@
 import Layout from '../components/Layout/Layout'
-import { StateContext } from '../context/contextState'
+import RecoilNexus from "recoil-nexus";
+import { RecoilRoot, } from 'recoil';
 import '../styles/globals.css'
 
 export default function App({ Component, pageProps }) {
   return(
-    <StateContext>
+    <RecoilRoot>
+    <RecoilNexus />
       <Layout><Component {...pageProps} /></Layout>
-      </StateContext>
+      </RecoilRoot>
   )
 
 

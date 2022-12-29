@@ -56,7 +56,7 @@ const products = [
 ];
 
 function ProductTable({ selectProductHandler }) {
-  const [createModal, setCreateModal] = useState(true);
+  const [createModal, setCreateModal] = useState(false);
 
   const createModalHandler = () => {
     console.log('hey')

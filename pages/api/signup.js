@@ -4,9 +4,8 @@ import User from '../../model/UserSchema.js'
 connect()
 
 export default async function handler(req,res){
+
     try {
-
-
         const user = await User.create(req.body);
         console.log(user)
         res.redirect('/')
