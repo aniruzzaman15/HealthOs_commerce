@@ -3,3 +3,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.percentage-number {
+    color: rgb(63, 81, 181);
+    font-size: 50px;
+    font-weight: bold;
+  }
+  .percentage-sign {
+    color: rgb(63, 81, 181);
+    font-size: 40px;
+  }
+  .percentage-container {
+    text-align: center;
+  }
+  .percentage-container:first-child {
+    padding-bottom: 3em;
+  }
