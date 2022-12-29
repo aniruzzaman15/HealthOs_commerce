@@ -1,16 +1,25 @@
 import React from 'react'
 import DashboardNavbar from './DashboardNavbar'
+import OrderTable from './orderTable'
+import { useState } from 'react';
+import OrderDetail from './orderDetail';
 
 function OrderList() {
+  const [orderPageIsOpen, setOrderPageIsOpen] = useState(false);
+
+  const selectOrderHandler = () => {
+    if (orderPageIsOpen) setOrderPageIsOpen(false);
+    else setOrderPageIsOpen(true);
+  };
   return (
     <div>
   <DashboardNavbar/>
   <div className="mt-5">
-        {!profilePageIsOpen && (
-          <CustomerTable selectCustomerHandler={selectCustomerHandler} />
+        {!orderPageIsOpen && (
+          <OrderTable selectOrderHandler={selectOrderHandler} />
         )}
-        {profilePageIsOpen && (
-          <ProfilePage selectCustomerHandler={selectCustomerHandler} />
+        {orderPageIsOpen && (
+          <OrderDetail selectOrderHandler={selectOrderHandler} />
         )}
       </div>
     </div>

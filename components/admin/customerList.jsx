@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import CustomerDetail from "./customerDetail";
 import CustomerTable from "./customerTable";
 import DashboardNavbar from "./DashboardNavbar";
-import ProfilePage from "./ProfilePage";
+
 
 function CustomerList() {
   const [profilePageIsOpen, setProfilePageIsOpen] = useState(false);
@@ -19,7 +20,7 @@ function CustomerList() {
           <CustomerTable selectCustomerHandler={selectCustomerHandler} />
         )}
         {profilePageIsOpen && (
-          <ProfilePage selectCustomerHandler={selectCustomerHandler} />
+          <CustomerDetail selectCustomerHandler={selectCustomerHandler} />
         )}
       </div>
     </div>
