@@ -1,15 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useRecoilState } from 'recoil';
 import { cartIsOpenState } from '../../State/State';
+import { cartState } from './../../State/State';
 
 
 const Cart = () => {
 
-const [cartItems, setCartItems] = useState([{}])
-const [showCart,setShowCart] = useState(true)
+const [cartItems, setCartItems] = useRecoilState(cartState)
+const [totalPrice, setTotalPrice] = useState(0)
+
+useEffect(()=>{
+  let totalPrice = 0
+  cartItems.products.map((product)=>{
+    totalPrice += parseInt(product.product_price)
+  })
+
+  setTotalPrice(totalPrice)
+
+},[])
 
 const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
   return (
@@ -40,50 +51,29 @@ const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
           </div>
         )}
 
-        <div className="product-container mt-[10px]">
-          {cartItems.length >= 1 && cartItems.map((item) => (
-            <div className="product py-[20px] px-[5px]" key={'item._id'}>
-              <img src={''} className="cart-product-image w-[25%] h-[25%] " />
+        <div className="max-h-[650px] overflow-y-auto mt-[10px]">
+          {cartItems.products.length >= 1 && cartItems.products.map((item) => (
+            <div className=" py-[20px] px-[5px] flex justify-between" key={'item._id'}>
+              <img src={item.product_thumbnail} className=" w-[25%] h-[25%] " />
               <div className=" w-[200px]">
                 <div className="flex-wrap gap-[10px]">
-                  <h5 className='text-[16px] text-[#324d67]'>{'item.name'}</h5>
-                  <h4 className='text-[16px] text-[#000]'>{'item.price'}</h4>
+                  <h5 className='text-[16px] text-[#324d67]'>{item.product_name}</h5>
+                  <h4 className='text-[16px] text-[#000]'>{item.product_price} $</h4>
                 </div>
-                <div className="flex-wrap mt-[30px]">
-                  <div>
-                  <p className=" border-[1px] border-solid border-[#eee] p-[6px]">
-                    <span className="minus text-[16px] py-[6px] px-[12px] pointer text-[#f02d34] border-r-[1px] border-solid border-[gray]"
-                    //  onClick={() => toggleCartItemQuanitity(item._id, 'dec') }
-                    >
-                    <AiOutlineMinus />
-                    </span>
-                    <span className="num  text-[20px] py-[6px] px-[12px] pointer  border-r-[1px] border-solid border-[gray]" onClick="">{'item.quantity'}</span>
-                    <span className="plus  text-[16px] py-[6px] px-[12px] pointer text-[rgb(49, 168, 49)]  border-r-[1px] border-solid border-[gray]"
-                    //  onClick={() => toggleCartItemQuanitity(item._id, 'inc') }
-                     ><AiOutlinePlus /></span>
-                  </p>
-                  </div>
-                  <button
-                    type="button"
-                    className=" text-[24px] text-[#f02d34] pointer bg-transparent border-none"
-                    onClick={() => onRemove(item)}
-                  >
-                    <TiDeleteOutline />
-                  </button>
-                </div>
+
               </div>
             </div>
           ))}
         </div>
-        {cartItems.length >= 1 && (
+        {cartItems.products.length >= 1 && (
           <div className="cart-bottom absolute bottom-[12px] right-[5px] w-full py-[30px] px-[64px]">
             <div className="total flex space-between">
               <h3 className='text-[20px]'>Subtotal:</h3>
-              <h3 className='text-[20px]'>{'totalPrice'}</h3>
+              <h3 className='text-[20px]'>{totalPrice}</h3>
             </div>
             <div className="btn-container w-[400px] m-auto">
               <button type="button" className="w-full max-w-[400px] py-[10px] px-[12px] rounded-[15px] border-none text-[20px] mt-[40px] uppercase bg-[#f02d34] text-[#fff] pointer "
-              //  onClick={handleCheckout}
+
                >
                 Pay
               </button>
