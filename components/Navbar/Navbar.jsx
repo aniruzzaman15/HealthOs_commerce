@@ -1,28 +1,28 @@
 // import { Badge} from "@material-ui/core";
 // import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 
 import { BsFillCartFill } from "react-icons/bs";
-import Cart from './../cart/Cart';
-import { useRecoilState } from 'recoil';
+import Cart from "./../cart/Cart";
+import { useRecoilState } from "recoil";
 import { cartIsOpenState } from "../../State/State";
-import { useRecoilValue } from 'recoil';
-import { cartState } from './../../State/State';
+import { useRecoilValue } from "recoil";
+import { cartState } from "./../../State/State";
+import { userState } from "./../../State/State";
 const Navbar = () => {
+  const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState);
+  const user = useRecoilValue(userState);
 
-  const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
-
-  const cartValue = useRecoilValue(cartState)
+  const cartValue = useRecoilValue(cartState);
 
   return (
     <div className="navbar h-[72px] shadow-sm relative z-10 ">
       <div className="wrapper pl-[20px] pr-[20px] pt-[10px] pb-[10px] flex justify-between items-center mobile:pl-0 mobile:pr-0">
         <div className=" flex-1   mobile:ml-6">
-          <Link href='/'>
-          <h4 className="logo font-bold text-[18px]">HealthOs Commerce</h4>
+          <Link href="/">
+            <h4 className="logo font-bold text-[18px]">HealthOs Commerce</h4>
           </Link>
-
         </div>
         <div className=" left flex flex-1  items-center">
           {/* Search Input */}
@@ -65,26 +65,56 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="right flex flex-1 items-center justify-end mobile:justify-center mobile:flex-[2]">
-        <Link href='/dashboard' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Dashboard</Link>
-        <Link href='/products' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Products</Link>
-          <Link href='/signup' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Sign Up</Link>
-          <Link href='/signin' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Sign In</Link>
+          {user && (
+            <Link
+              href="/dashboard"
+              className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]"
+            >
+              Dashboard
+            </Link>
+          )}
 
+          <Link
+            href="/products"
+            className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]"
+          >
+            Products
+          </Link>
+          {!user && (
+            <>
+              <Link
+                href="/signup"
+                className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]"
+              >
+                Sign Up
+              </Link>
+              <Link
+                href="/signin"
+                className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]"
+              >
+                Sign In
+              </Link>
+            </>
+          )}
           <div className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">
-          <div className="relative" onClick={()=>setCartIsOpen(true)}>
-          <BsFillCartFill size='1.5em'/>
+            <div className="relative" onClick={() => setCartIsOpen(true)}>
+              <BsFillCartFill size="1.5em" />
 
-          <div className="inline-flex absolute -top-[17px] -right-[17px] justify-center items-center w-6 h-6 text-xs font-bold text-[#000] ">{cartValue.totalQty}</div>
+              <div className="inline-flex absolute -top-[17px] -right-[17px] justify-center items-center w-6 h-6 text-xs font-bold text-[#000] ">
+                {cartValue.totalQty}
+              </div>
+            </div>
           </div>
-
-
-          </div>
+          {user && (
+            <img
+              className="w-[27px] ml-[50px] cursor-pointer rounded-[50%] "
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              alt=""
+            />
+          )}
         </div>
       </div>
-      {
-       cartIsOpen && <Cart/>
-      }
-
+      {cartIsOpen && <Cart />}
     </div>
   );
 };
