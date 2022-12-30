@@ -25,3 +25,9 @@ export const cartIsOpenState = atom({
     key: "cartIsOpenState",
     default: false
 });
+
+
+export const uploadImageState = atom({
+    key: "uploadImageState",
+    default: null
+});

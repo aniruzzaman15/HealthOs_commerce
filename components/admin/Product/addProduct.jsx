@@ -1,15 +1,53 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-;
+import { ProductsState } from "../../../State/State";
+import { convertToBase64, notify } from './../../../lib/utils';
+import { getRecoil, setRecoil } from 'recoil-nexus';
+import { Upload } from "upload-js";
+import { api_key } from './../../../config';
+
 function AddProduct({ setCreateModal }) {
 
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState('')
+  const [progress, setProgress] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [url, setUrl] = useState(null)
+
+  const upload = Upload({ apiKey: api_key }); // Your real API key.
+
+  const onFileSelected = async (event) => {
+    setUploading(true)
+    const [ file ]  = event.target.files;
+    const { fileUrl } = await upload.uploadFile(file, { onProgress });
+    setUrl(fileUrl)
+  }
+
+  const onProgress = ({ progress }) => {
+    console.log(`File uploading: ${progress}% complete.`)
+    setProgress(progress)
+    if(progress === 100) setUploading(false)
+  }
+
 
   const addProductHandler = async () => {
 
+    if(productName.length < 1 || productPrice.length < 1 || !url) {
+      notify('All the field must be filled!')
+      return
+    }
+
     let dateTime = new Date().toISOString().slice(0, 10)
-    let id = uuidv4()
+    let id = uuidv4();
+    let productData = {
+      product_name:productName,
+      product_thumbnail:url,
+      product_price:productPrice,
+      product_qty:40,
+      date:dateTime,
+      product_id:id
+
+    }
 
     let result = await fetch('/api/addProduct', {
       method: 'POST',
@@ -17,18 +55,15 @@ function AddProduct({ setCreateModal }) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        product_name:productName,
-        product_thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDYFhn-eUDhXP0mAvpDanf8Q3_PRz1BqpUfw&usqp=CAU',
-        product_price:productPrice,
-        product_qty:40,
-        date:dateTime,
-        product_id:id
-
-      })
+      body: JSON.stringify(productData)
     })
 
     if(result.ok){
+      notify('Product uploaded Successfully')
+
+      setRecoil(ProductsState,(oldState)=>{
+        return [productData,...oldState ]
+      })
       setCreateModal(false)
     }
 
@@ -95,6 +130,7 @@ function AddProduct({ setCreateModal }) {
                 <input
                   type="file"
                   name="product_thumbnail"
+                  onChange={onFileSelected}
                   id="product_thumbnail"
                   placeholder="product name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -123,7 +159,8 @@ function AddProduct({ setCreateModal }) {
                 onClick={addProductHandler}
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
               >
-                Add
+
+                {uploading ? `${progress}%` : 'Add' }
               </button>
             </form>
           </div>

@@ -15,7 +15,7 @@ const ProductDetail = ({product}) => {
             src={product.product_thumbnail}
             width={250}
             height={250}
-            className="product-image rounded-[15px] bg-[#ebebeb]"
+            className="product-image rounded-[15px] bg-[#ebebeb] h-[200px] object-cover"
           />
           <p className="font-medium">{product.product_name}</p>
           <p className="font-extrabold mt-[6px] text-[#000]">{product.product_price} $</p>
