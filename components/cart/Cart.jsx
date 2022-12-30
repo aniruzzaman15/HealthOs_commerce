@@ -2,19 +2,23 @@ import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { useRecoilState } from 'recoil';
+import { cartIsOpenState } from '../../State/State';
 
 
 const Cart = () => {
 
 const [cartItems, setCartItems] = useState([{}])
 const [showCart,setShowCart] = useState(true)
+
+const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
   return (
     <div className=" w-[100vw] bg-[rgba(0,0,0,0.5)] fixed right-0 top-0 z-[100] transition transition-all ease-in-out duration-1000 " >
       <div className="cart-container h-[100vh] w-[600px] bg-white float-right py-[40px] px-[10px] relative">
         <button
         type="button"
         className="cart-heading flex items-center text-[18px] font-medium pointer gap-[2px] ml-[10px] border-none bg-transparent"
-        onClick={() => setShowCart(false)}>
+        onClick={() => setCartIsOpen(false)}>
           <AiOutlineLeft />
           <span className="heading ml-[10px] ">Your Cart</span>
           <span className="cart-num-items ml-[10px] text-[#f02d34]">({'totalQuantities'} items)</span>

@@ -9,13 +9,16 @@ import { useRecoilState } from 'recoil';
 import { cartIsOpenState } from "../../State/State";
 const Navbar = () => {
 
-  const [cartIsOpen,setRecoilState] = useRecoilState(cartIsOpenState)
+  const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
 
   return (
     <div className="navbar h-[72px] shadow-sm relative z-10 ">
       <div className="wrapper pl-[20px] pr-[20px] pt-[10px] pb-[10px] flex justify-between items-center mobile:pl-0 mobile:pr-0">
         <div className=" flex-1   mobile:ml-6">
+          <Link href='/'>
           <h4 className="logo font-bold text-[18px]">HealthOs Commerce</h4>
+          </Link>
+
         </div>
         <div className=" left flex flex-1  items-center">
           {/* Search Input */}
@@ -64,7 +67,7 @@ const Navbar = () => {
           <Link href='/signin' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Sign In</Link>
 
           <div className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">
-          <div className="relative">
+          <div className="relative" onClick={()=>setCartIsOpen(true)}>
           <BsFillCartFill size='1.5em'/>
 
           <div className="inline-flex absolute -top-[17px] -right-[17px] justify-center items-center w-6 h-6 text-xs font-bold text-[#000] ">20</div>

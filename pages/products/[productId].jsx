@@ -10,8 +10,18 @@ import connect from "../../lib/mongodb";
 import Product from "../../model/ProductSchema";
 import { useRouter } from "next/router";
 import Footer from './../../components/Home/Footer';
+import { useRecoilState } from 'recoil';
+import { cartState } from './../../State/State';
 
 function SingleProduct({product}) {
+//   export const cartState = atom({
+//     key: "cartState",
+//     default: {
+//         totalQty:0,
+//         products:[]
+//     }
+// });
+  const [cartValue, setCartValue] = useRecoilState(cartState)
   const router = useRouter();
   const query = router.query;
   console.log("quereeey", product);
@@ -57,7 +67,7 @@ function SingleProduct({product}) {
                   <AiOutlineMinus />
                 </span>
                 <span className="num  text-[20px] py-[6px] px-[12px] cursor-pointer ">
-                  {product.product_qty}
+                  {cartValue.totalQty}
                 </span>
                 <span
                   className="plus text-[16px] text-[rgb(49,168,49)] flex justify-center items-center border-[1px] border-solid border-[#191919]  py-[6px] px-[12px] cursor-pointer "
