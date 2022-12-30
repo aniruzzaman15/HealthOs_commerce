@@ -7,7 +7,7 @@ function index() {
     <div>
         <Navbar/>
 
-        <Cart/>
+
     </div>
   )
 }

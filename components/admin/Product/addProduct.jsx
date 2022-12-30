@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
+;
 function AddProduct({ setCreateModal }) {
 
   const [productName, setProductName] = useState('')
@@ -8,6 +9,7 @@ function AddProduct({ setCreateModal }) {
   const addProductHandler = async () => {
 
     let dateTime = new Date().toISOString().slice(0, 10)
+    let id = uuidv4()
 
     await fetch('/api/addProduct', {
       method: 'POST',
@@ -19,7 +21,9 @@ function AddProduct({ setCreateModal }) {
         product_name:productName,
         product_thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDYFhn-eUDhXP0mAvpDanf8Q3_PRz1BqpUfw&usqp=CAU',
         product_price:productPrice,
-        dateTime
+        product_qty:40,
+        date:dateTime,
+        product_id:id
 
       })
     })
