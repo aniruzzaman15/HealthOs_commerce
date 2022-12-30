@@ -11,7 +11,7 @@ function AddProduct({ setCreateModal }) {
     let dateTime = new Date().toISOString().slice(0, 10)
     let id = uuidv4()
 
-    await fetch('/api/addProduct', {
+    let result = await fetch('/api/addProduct', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -27,6 +27,10 @@ function AddProduct({ setCreateModal }) {
 
       })
     })
+
+    if(result.ok){
+      setCreateModal(false)
+    }
 
   }
   return (

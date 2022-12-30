@@ -5,15 +5,15 @@ connect()
 
 export default async function handler(req,res){
     try {
-        console.log(req)
-
         const product = await Product.create(req.body);
-        console.log(product)
-        // res.redirect('/dashboard')
-        // if(!product){
-        //     return res.json({"code":'product not created'})
-        // }
+
+
+        res.status(201).json({status:'product created successfully'})
+        res.redirect('/dashboard')
+        if(!product){
+            return res.json({"code":'product not created'})
+        }
     } catch (error) {
-        // res.status(400).json({status:'Not able to create a new product.'})
+         res.status(400).json({status:'Not able to create a new product.'})
     }
 }

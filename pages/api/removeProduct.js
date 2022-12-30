@@ -10,7 +10,7 @@ export default async function handler(req,res){
         if(result) res.status(200).json({status:'product deleted successfully'})
 
     } catch (error) {
-        //
+        res.status(500).json({status:'product deleted successfully'})
         console.log("couldn't process request")
     }
 }
