@@ -4,7 +4,7 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import React from "react";
+import React,{useState} from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import connect from "../../lib/mongodb";
 import Product from "../../model/ProductSchema";
@@ -12,19 +12,28 @@ import { useRouter } from "next/router";
 import Footer from './../../components/Home/Footer';
 import { useRecoilState } from 'recoil';
 import { cartState } from './../../State/State';
+// import { menusOne } from "../../lib/utils";
+// import { addOne, addToCart } from './../../lib/utils';
+import { getRecoil } from 'recoil-nexus';
+import { addToCart, buyNow } from "../../lib/utils";
 
 function SingleProduct({product}) {
-//   export const cartState = atom({
-//     key: "cartState",
-//     default: {
-//         totalQty:0,
-//         products:[]
-//     }
-// });
+
   const [cartValue, setCartValue] = useRecoilState(cartState)
-  const router = useRouter();
-  const query = router.query;
-  console.log("quereeey", product);
+  const [items, setItems] = useState([]);
+
+
+const addOne = () => {
+  setItems((oldState)=>{
+    return [...oldState,product]
+  })
+}
+
+const menusOne = () => {
+  let tempItems = [...items]
+  tempItems.splice(tempItems.length-1,1)
+  setItems(tempItems)
+}
 
   return (
     <>
@@ -62,16 +71,16 @@ function SingleProduct({product}) {
               <p className="quantity-desc border-[1px] border-solid border-[#191919] p-[6px] flex">
                 <span
                   className="minus text-[16px] py-[6px] px-[12px] flex justify-center items-center cursor-pointer border-[1px] border-solid border-[#191919]"
-                  onClick={"decQty"}
+                  onClick={menusOne}
                 >
                   <AiOutlineMinus />
                 </span>
                 <span className="num  text-[20px] py-[6px] px-[12px] cursor-pointer ">
-                  {cartValue.totalQty}
+                  {items.length}
                 </span>
                 <span
                   className="plus text-[16px] text-[rgb(49,168,49)] flex justify-center items-center border-[1px] border-solid border-[#191919]  py-[6px] px-[12px] cursor-pointer "
-                  onClick={"incQty"}
+                  onClick={addOne}
                 >
                   <AiOutlinePlus />
                 </span>
@@ -80,6 +89,7 @@ function SingleProduct({product}) {
             <div className="buttons flex gap-[30px]">
               <button
                 type="button"
+                onClick={()=>addToCart(items)}
                 className="add-to-cart py-[10px] px-[20px] mt-[40px] text-[18px] font-medium bg-white cursor-pointer w-[200px]  text-[#f02d34] scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] border-[1px] border-solid border-[#191919]"
               >
                 Add to Cart
@@ -87,7 +97,7 @@ function SingleProduct({product}) {
               <button
                 type="button"
                 className="buy-now w-[200px] py-[10px] px-[20px] bg-[#f02d34] text-white border-none mt-[40px] text-[18px] font-medium cursor-pointer scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] "
-                onClick={"handleBuyNow"}
+                onClick={buyNow}
               >
                 Buy Now
               </button>

@@ -7,9 +7,13 @@ import { BsFillCartFill } from "react-icons/bs";
 import Cart from './../cart/Cart';
 import { useRecoilState } from 'recoil';
 import { cartIsOpenState } from "../../State/State";
+import { useRecoilValue } from 'recoil';
+import { cartState } from './../../State/State';
 const Navbar = () => {
 
   const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
+
+  const cartValue = useRecoilValue(cartState)
 
   return (
     <div className="navbar h-[72px] shadow-sm relative z-10 ">
@@ -70,7 +74,7 @@ const Navbar = () => {
           <div className="relative" onClick={()=>setCartIsOpen(true)}>
           <BsFillCartFill size='1.5em'/>
 
-          <div className="inline-flex absolute -top-[17px] -right-[17px] justify-center items-center w-6 h-6 text-xs font-bold text-[#000] ">20</div>
+          <div className="inline-flex absolute -top-[17px] -right-[17px] justify-center items-center w-6 h-6 text-xs font-bold text-[#000] ">{cartValue.totalQty}</div>
           </div>
 
 
