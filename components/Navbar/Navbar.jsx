@@ -4,7 +4,12 @@ import React from "react";
 import Link from 'next/link'
 
 import { BsFillCartFill } from "react-icons/bs";
+import Cart from './../cart/Cart';
+import { useRecoilState } from 'recoil';
+import { cartIsOpenState } from "../../State/State";
 const Navbar = () => {
+
+  const [cartIsOpen,setRecoilState] = useRecoilState(cartIsOpenState)
 
   return (
     <div className="navbar h-[72px] shadow-sm relative z-10 ">
@@ -69,6 +74,10 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {
+       cartIsOpen && <Cart/>
+      }
+
     </div>
   );
 };
