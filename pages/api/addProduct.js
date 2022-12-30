@@ -1,5 +1,5 @@
 import connect from "../../lib/mongodb";
-import Product from '../../model/ProductSchema.js'
+import ProductSchema from '../../model/ProductSchema.js'
 
 connect()
 
@@ -7,7 +7,7 @@ export default async function handler(req,res){
     try {
         console.log(req)
 
-        const product = await Product.create(req.body);
+        const product = await ProductSchema.create(req.body);
         console.log(product)
         // res.redirect('/dashboard')
         // if(!product){

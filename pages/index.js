@@ -1,65 +1,21 @@
 
+import {useEffect} from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import HeroBanner from '../components/Home/HeroBannar'
 import Footer from '../components/Home/Footer'
 import Cart from '../components/cart/Cart'
 import Product from '../components/Home/Product';
 import { server } from './../config';
-
-const products = [
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-  {
-    name: "canon 105",
-    imageUrl: "/image/hero.jpg",
-    price: 20,
-    rating: 4.9,
-    createdAt: "12/01/22",
-  },
-];
+import connect from "../lib/mongodb";
+import ProductSchema from '../model/ProductSchema'
 
 
-export default function Home() {
+
+export default function Home(props) {
+
+  useEffect(()=>{
+    console.log(props.products)
+  },[])
 
   return (
     <>
@@ -72,7 +28,7 @@ export default function Home() {
     </div>
 
     <div className="products-container flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
-      {products?.map((product) => <Product key={product.name} product={product} />)}
+      {props.products?.map((product) => <Product key={product.name} product={product} />)}
     </div>
     <Footer/>
   </div>
@@ -81,14 +37,21 @@ export default function Home() {
 }
 
 export async function getServerSideProps(){
+  let products = []
+  connect()
+  try{
+    const res = await Product.find()
+    console.log(res)
+    if(res) products = res
+  } catch (e) {
+    console.log(e)
+  }
 
-  const response = await fetch(`${server}/api/allProducts`)
-  // console.log(response)
-  // const data = await response.json()
-  // console.log('data',data)
+
+
   return {
     props:{
-      id:'23'
+      products:JSON.parse(JSON.stringify(products))
     }
   }
 }
