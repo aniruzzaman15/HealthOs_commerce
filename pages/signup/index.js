@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { notify } from "../../lib/utils";
 import { server } from './../../config';
+import { useRouter } from 'next/router';
 
 function SignUp() {
 
@@ -12,20 +13,25 @@ function SignUp() {
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
 
-  const router
+  const router = useRouter()
 
   const signUpHandler = async () => {
-
-
-
-
 
     if (!checkRegexParameter.test(phone)){
      notify('Must be a Bangladeshi Phone No')
      return
     }
 
-    let result = await fetch(`${server  }/api/signup`, {
+    if (password.length < 8){
+      notify('Minimum 8 characters of password is required!')
+      return
+     }
+     if (fullName.length < 1){
+      notify("Full name field can't be empty!")
+      return
+     }
+
+    let result = await fetch(`${server}/api/signup`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -37,7 +43,7 @@ function SignUp() {
         full_name:fullName,
       })
     })
-    if(result.ok)
+    if(result.ok) router.push(`${server}/api/signin`)
 
   }
 
