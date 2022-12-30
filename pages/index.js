@@ -4,17 +4,21 @@ import Navbar from '../components/Navbar/Navbar'
 import HeroBanner from '../components/Home/HeroBannar'
 import Footer from '../components/Home/Footer'
 import Cart from '../components/cart/Cart'
-import Product from '../components/Home/Product';
+import ProductDetail from '../components/Home/Product';
 import { server } from './../config';
 import connect from "../lib/mongodb";
-import ProductSchema from '../model/ProductSchema'
+import Product from '../model/ProductSchema'
+import { ProductsState } from '../State/State'
+import { useRecoilState } from 'recoil';
 
 
 
 export default function Home(props) {
 
+  const [allProducts, setAllProducts] = useRecoilState(ProductsState && ProductsState)
+
   useEffect(()=>{
-    console.log(props.products)
+    setAllProducts(props.products)
   },[])
 
   return (
@@ -28,7 +32,7 @@ export default function Home(props) {
     </div>
 
     <div className="products-container flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
-      {props.products?.map((product) => <Product key={product.name} product={product} />)}
+      {props.products?.map((product) => <ProductDetail key={product.name} product={product} />)}
     </div>
     <Footer/>
   </div>
@@ -41,7 +45,6 @@ export async function getServerSideProps(){
   connect()
   try{
     const res = await Product.find()
-    console.log(res)
     if(res) products = res
   } catch (e) {
     console.log(e)

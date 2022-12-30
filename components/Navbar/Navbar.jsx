@@ -53,6 +53,7 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="right flex flex-1 items-center justify-end mobile:justify-center mobile:flex-[2]">
+        <Link href='/dashboard' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Dashboard</Link>
         <Link href='/products' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Products</Link>
           <Link href='/signup' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Sign Up</Link>
           <Link href='/signin' className="text-[16px] cursor-pointer ml-[25px] mobile:ml-[5px]">Sign In</Link>

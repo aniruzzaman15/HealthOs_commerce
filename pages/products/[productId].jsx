@@ -3,8 +3,16 @@
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
+import connect from "../../lib/mongodb";
+import Product from '../../model/ProductSchema';
+import { useRouter } from 'next/router'
 
-function Product({product}) {
+
+function SingleProduct({product}) {
+
+    const router = useRouter()
+    const query = router.query
+    console.log('query',query)
   return (
     <>
     <Navbar/>
@@ -57,4 +65,35 @@ function Product({product}) {
   )
 }
 
-export default Product
+export async function getStaticPaths () {
+  const res = await Product.find()
+  const paths = res.map(product=>{
+    return {
+      params: {id:product.product_id}
+    }
+  })
+  console.log(res)
+return { paths:paths, fallback: false }
+}
+
+
+export async function getStaticProps(ctx){
+  let params = ctx;
+  console.log(params)
+  let product = {}
+  connect()
+  try{
+     const res = await Product.findOne({product_id:params.id})
+    console.log(res)
+    if(res) product = res
+  } catch (e) {
+    console.log(e)
+  }
+
+  return {
+    props:product
+  }
+
+}
+
+export default SingleProduct
