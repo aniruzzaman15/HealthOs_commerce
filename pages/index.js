@@ -4,6 +4,7 @@ import HeroBanner from '../components/Home/HeroBannar'
 import Footer from '../components/Home/Footer'
 import Cart from '../components/cart/Cart'
 import Product from '../components/Home/Product';
+import { server } from './../config';
 
 const products = [
   {
@@ -81,8 +82,13 @@ export default function Home() {
 
 export async function getServerSideProps(){
 
-  const response = await fetch('/products')
-  const data = await response.json()
-  console.log('data',data)
-
+  const response = await fetch(`${server}/api/allProducts`)
+  // console.log(response)
+  // const data = await response.json()
+  // console.log('data',data)
+  return {
+    props:{
+      id:'23'
+    }
+  }
 }

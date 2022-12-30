@@ -4,13 +4,15 @@ import Product from '../../model/ProductSchema.js'
 connect()
 
 export default async function handler(req,res){
-
-    const products = await Product.find({})
+    console.log('ginto.....ot you')
+    const products = await Product.find()
     console.log('got you', products)
-    if(!user){
+    if(!products){
         return res.json({status:'Not able to find the products'})
     }
     else{
         // res.redirect('/dashboard')
+        console.log('found no products')
+
     }
 }
