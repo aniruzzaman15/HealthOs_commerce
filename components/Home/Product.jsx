@@ -1,12 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
 
 
 const ProductDetail = ({product}) => {
-  const router = useRouter()
-  const query = router.query
-  console.log('query',query)
+
   return (
     <div key={product.product_id} className='border-[1px] border-solid border-[#191919] hover:border-[red]  p-2 bg-[#fff] '>
       <Link href={`/products/${product.product_id}`}>
