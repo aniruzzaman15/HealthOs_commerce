@@ -4,36 +4,31 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import connect from "../../lib/mongodb";
 import Product from "../../model/ProductSchema";
-import { useRouter } from "next/router";
-import Footer from './../../components/Home/Footer';
-import { useRecoilState } from 'recoil';
-import { cartState } from './../../State/State';
-// import { menusOne } from "../../lib/utils";
-// import { addOne, addToCart } from './../../lib/utils';
-import { getRecoil } from 'recoil-nexus';
-import { addToCart, buyNow } from "../../lib/utils";
+import Footer from "./../../components/Home/Footer";
+import { useRecoilState } from "recoil";
+import { cartState } from "./../../State/State";
+import { buyNow } from "../../lib/utils";
+import { addToCart } from './../../lib/utils';
 
-function SingleProduct({product}) {
-
-  const [cartValue, setCartValue] = useRecoilState(cartState)
+function SingleProduct({ product }) {
+  const [cartValue, setCartValue] = useRecoilState(cartState);
   const [items, setItems] = useState([]);
 
+  const addOne = () => {
+    setItems((oldState) => {
+      return [...oldState, product];
+    });
+  };
 
-const addOne = () => {
-  setItems((oldState)=>{
-    return [...oldState,product]
-  })
-}
-
-const menusOne = () => {
-  let tempItems = [...items]
-  tempItems.splice(tempItems.length-1,1)
-  setItems(tempItems)
-}
+  const menusOne = () => {
+    let tempItems = [...items];
+    tempItems.splice(tempItems.length - 1, 1);
+    setItems(tempItems);
+  };
 
   return (
     <>
@@ -89,14 +84,14 @@ const menusOne = () => {
             <div className="buttons flex gap-[30px]">
               <button
                 type="button"
-                onClick={()=>addToCart(items)}
-                className="add-to-cart py-[10px] px-[20px] mt-[40px] text-[18px] font-medium bg-white cursor-pointer w-[200px]  text-[#f02d34] scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] border-[1px] border-solid border-[#191919]"
+                onClick={() => addToCart(items)}
+                className="add-to-cart select-none py-[10px] px-[20px] mt-[40px] text-[18px] font-medium bg-white cursor-pointer w-[200px]  text-[#f02d34] scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] border-[1px] border-solid border-[#191919]"
               >
                 Add to Cart
               </button>
               <button
                 type="button"
-                className="buy-now w-[200px] py-[10px] px-[20px] bg-[#f02d34] text-white border-none mt-[40px] text-[18px] font-medium cursor-pointer scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] "
+                className="buy-now select-none w-[200px] py-[10px] px-[20px] bg-[#f02d34] text-white border-none mt-[40px] text-[18px] font-medium cursor-pointer scale-[1,1] transition-transform duration-[0.5s] ease hover:scale-[1.1,1.1] "
                 onClick={buyNow}
               >
                 Buy Now
@@ -105,14 +100,14 @@ const menusOne = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
 
 export async function getServerSideProps(ctx) {
   let { params } = ctx;
-  console.log(params);
+
   let product = {};
   connect();
   try {
@@ -125,7 +120,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      product:JSON.parse(JSON.stringify(product))
+      product: JSON.parse(JSON.stringify(product)),
     },
   };
 }

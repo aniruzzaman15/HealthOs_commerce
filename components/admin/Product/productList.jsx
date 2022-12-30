@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
 import DashboardNavbar from "./../DashboardNavbar";
 import ProductTable from "./ProductTable";
-
 import ProductDetail from "./productDetail";
-import connect from "./../../../lib/mongodb";
 import { server } from "./../../../config";
 import { useRecoilValue } from 'recoil';
 import { activeProductDetailState, ProductsState } from "../../../State/State";

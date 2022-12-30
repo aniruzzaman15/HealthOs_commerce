@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import AddProduct from "./addProduct";
-import { activeProductDetailState, ProductsState } from "../../../State/State";
+import {  ProductsState } from "../../../State/State";
 import { useRecoilValue } from 'recoil';
-import { setRecoil } from 'recoil-nexus';
-
 
 
 function ProductTable({ selectProductHandler,deleteThisProduct }) {
@@ -17,9 +15,6 @@ function ProductTable({ selectProductHandler,deleteThisProduct }) {
     else setCreateModal(true);
   };
 
-  const selectProduct = (product) =>{
-
-  }
   return (
     <>
       {createModal && <AddProduct setCreateModal={setCreateModal}/>}

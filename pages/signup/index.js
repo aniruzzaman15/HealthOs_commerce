@@ -47,8 +47,6 @@ function SignUp() {
 
   }
 
-
-
   return (
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center  px-6 pt-[100px] mx-auto md:h-screen ">

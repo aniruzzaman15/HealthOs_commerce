@@ -9,6 +9,7 @@ function DashboardNavbar() {
     const toggleSetting = () => {
       setSettingsActive(!settingsActive);
     };
+
   return (
     <header className="z-40 py-4  bg-white shadow-sm  ">
     <div className="flex items-center justify-between h-8 px-6 mx-auto">

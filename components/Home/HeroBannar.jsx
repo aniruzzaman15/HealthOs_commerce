@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-import Image from 'next/image'
 const HeroBanner = () => {
   return (
     <div className="mt-[50px] px-[40px] py-[100px] bg-[#F7F7F7] rounded-[15px] relative h-[500px] leading-[0.9] w-full">
@@ -10,8 +9,6 @@ const HeroBanner = () => {
         <h3 className='font-[48px] mt-[17px]'>60% OFF!!</h3>
         <h1 className='text-[#191919] text-[6em] uppercase -ml-[10px]'>Gorgeous</h1>
         <img src="https://www.kindpng.com/picc/m/190-1900264_gopro-camera-png-transparent-images-gopro-hero-5.png" alt="" className="hero-banner-image absolute top-[0] right-[10%] w-[600px]  "/>
-        {/* <Image width={650} height={450}  src='https://www.kindpng.com/picc/m/190-1900264_gopro-camera-png-transparent-images-gopro-hero-5.png' alt="" className="hero-banner-image absolute top-[0] right-[20%] w-[450px] h-[450px] " /> */}
-
 
         <div>
           <Link href={`/products`}>

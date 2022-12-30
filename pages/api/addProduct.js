@@ -6,8 +6,6 @@ connect()
 export default async function handler(req,res){
     try {
         const product = await Product.create(req.body);
-
-
         res.status(201).json({status:'product created successfully'})
         res.redirect('/dashboard')
         if(!product){

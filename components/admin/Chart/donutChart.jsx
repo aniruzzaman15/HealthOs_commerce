@@ -10,7 +10,6 @@ import {
 import "@progress/kendo-theme-material/dist/all.css";
 import { donutChartData } from '../../../lib/data';
 
-/* This function's outputted string determines the label contents */
 const labelTemplate = e => e.category + "\n" + e.value + "%";
 
 function DonutChartContainer () {

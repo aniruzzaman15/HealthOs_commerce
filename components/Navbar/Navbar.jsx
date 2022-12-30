@@ -1,8 +1,6 @@
-// import { Badge} from "@material-ui/core";
-// import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+
 import React from "react";
 import Link from "next/link";
-
 import { BsFillCartFill } from "react-icons/bs";
 import Cart from "./../cart/Cart";
 import { useRecoilState } from "recoil";

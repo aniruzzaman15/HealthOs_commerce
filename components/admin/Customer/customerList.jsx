@@ -2,17 +2,17 @@ import Image from "next/image";
 import React, { useState } from "react";
 import CustomerDetail from "./customerDetail";
 import CustomerTable from "./customerTable";
-
 import DashboardNavbar from './../DashboardNavbar';
 
-
 function CustomerList() {
+
   const [profilePageIsOpen, setProfilePageIsOpen] = useState(false);
 
   const selectCustomerHandler = () => {
     if (profilePageIsOpen) setProfilePageIsOpen(false);
     else setProfilePageIsOpen(true);
   };
+
   return (
     <div>
       <DashboardNavbar />

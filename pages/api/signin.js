@@ -7,7 +7,7 @@ export default async function handler(req,res){
 
     const {phone,password} = req.body
     const user = await User.findOne({phone,password})
-    console.log('got you', user)
+
     if(!user){
         res.status(401).json({status:"Customer doesn't exist"})
     }

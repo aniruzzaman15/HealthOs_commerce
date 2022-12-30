@@ -2,50 +2,8 @@
 
 import Image from 'next/image';
 import React from 'react'
-const orderList = [
-    {
-      name: "Canon 105",
-      imageUrl:'/image/hero2.png',
-      order_id: 20,
-      price:1234,
-      customer:'anir',
-      date:'10-14-12'
-    },
-    {
-        name: "Canon 105",
-        imageUrl:'/image/hero2.png',
-        order_id: 20,
-        price:1234,
-        customer:'anir',
-        date:'10-14-12'
-      },
-      {
-        name: "Canon 105",
-        imageUrl:'/image/hero2.png',
-        order_id: 20,
-        price:1234,
-        customer:'anir',
-        date:'10-14-12'
-      },
-      {
-        name: "Canon 105",
-        imageUrl:'/image/hero2.png',
-        order_id: 20,
-        price:1234,
-        customer:'anir',
-        date:'10-14-12'
-      },
-      {
-        name: "Canon 105",
-        imageUrl:'/image/hero2.png',
-        order_id: 20,
-        price:1234,
-        customer:'anir',
-        date:'10-14-12'
-      }
+import { orderList } from './../../../lib/data';
 
-
-  ];
 function OrderTable({selectOrderHandler}) {
   return (
     <table className="w-full border-b border-gray-200">

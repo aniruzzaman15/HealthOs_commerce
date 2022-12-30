@@ -5,10 +5,11 @@ import { server } from "./../../config";
 import { notify } from "./../../lib/utils";
 import { setRecoil } from "recoil-nexus";
 import { userState } from "../../State/State";
+
 function SignIn() {
+
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-
   const router = useRouter();
 
   const signIpHandler = async () => {

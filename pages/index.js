@@ -11,8 +11,6 @@ import Product from '../model/ProductSchema'
 import { ProductsState } from '../State/State'
 import { useRecoilState } from 'recoil';
 
-
-
 export default function Home(props) {
 
   const [allProducts, setAllProducts] = useRecoilState(ProductsState && ProductsState)
@@ -32,7 +30,7 @@ export default function Home(props) {
     </div>
 
     <div className="products-container flex  flex-wrap justify-center gap-[15px] mb-[50px] mt-[20px] w-full">
-      {props.products?.map((product) => <ProductDetail key={product.name} product={product} />)}
+      {props.products?.map((product) => <ProductDetail product={product} />)}
     </div>
     <Footer/>
   </div>
