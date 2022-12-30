@@ -54,7 +54,7 @@ const [cartIsOpen, setCartIsOpen] = useRecoilState(cartIsOpenState)
         <div className="max-h-[650px] overflow-y-auto mt-[10px]">
           {cartItems.products.length >= 1 && cartItems.products.map((item) => (
             <div className=" py-[20px] px-[5px] flex justify-between" key={'item._id'}>
-              <img src={item.product_thumbnail} className=" w-[25%] h-[25%] " />
+              <img src={item.product_thumbnail} className=" object-cover h-[60px] w-[100px] " />
               <div className=" w-[200px]">
                 <div className="flex-wrap gap-[10px]">
                   <h5 className='text-[16px] text-[#324d67]'>{item.product_name}</h5>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import AddProduct from "./addProduct";
-import { ProductsState } from "../../../State/State";
+import { activeProductDetailState, ProductsState } from "../../../State/State";
 import { useRecoilValue } from 'recoil';
+import { setRecoil } from 'recoil-nexus';
 
 
 
@@ -15,6 +16,10 @@ function ProductTable({ selectProductHandler,deleteThisProduct }) {
     if (createModal) setCreateModal(false);
     else setCreateModal(true);
   };
+
+  const selectProduct = (product) =>{
+
+  }
   return (
     <>
       {createModal && <AddProduct setCreateModal={setCreateModal}/>}
@@ -60,10 +65,10 @@ function ProductTable({ selectProductHandler,deleteThisProduct }) {
             return (
               <tr
                 className="hover:bg-gray-100 transition-colors group cursor-pointer"
-                // onClick={selectProductHandler}
+                //
                 key={index}
               >
-                <td className="flex gap-x-4 items-center py-4 pl-10">
+                <td onClick={()=>selectProductHandler(product)} className="flex gap-x-4 items-center py-4 pl-10">
                   <input
                     type="checkbox"
                     className="w-6 h-6 text-indigo-600 rounded-md border-gray-300"

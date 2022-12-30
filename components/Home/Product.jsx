@@ -8,9 +8,9 @@ const ProductDetail = ({product}) => {
   const query = router.query
   console.log('query',query)
   return (
-    <div className='border-[1px] border-solid border-[#191919] p-2 bg-[#fff] '>
+    <div className='border-[1px] border-solid border-[#191919] hover:border-[red]  p-2 bg-[#fff] '>
       <Link href={`/products/${product.product_id}`}>
-        <div className="product-card pointer text-[#324d67]">
+        <div className="product-card pointer text-[#324d67] bg-transparent">
           <img
             src={product.product_thumbnail}
             width={250}

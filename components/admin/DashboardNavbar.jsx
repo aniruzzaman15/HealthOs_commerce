@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react'
+import { logoutHandler } from '../../lib/utils';
+import Link from 'next/link';
 
 function DashboardNavbar() {
     const [settingsActive, setSettingsActive] = useState(false);
@@ -88,32 +90,12 @@ function DashboardNavbar() {
 
           {settingsActive && (
             <ul className="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-green-400 border border-green-500 rounded-md shadow-md">
+
               <li className="flex">
-                <a
-                  className=" text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
-                  href="#"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>Profile</span>
-                </a>
-              </li>
-              <li className="flex">
-                <a
+                <Link
                   className="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
                   href="#"
+                  onClick={logoutHandler}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +112,7 @@ function DashboardNavbar() {
                     />
                   </svg>
                   <span>Log out</span>
-                </a>
+                </Link>
               </li>
             </ul>
           )}

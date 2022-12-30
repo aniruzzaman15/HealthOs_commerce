@@ -7,13 +7,14 @@ import ProductDetail from "./productDetail";
 import connect from "./../../../lib/mongodb";
 import { server } from "./../../../config";
 import { useRecoilValue } from 'recoil';
-import { ProductsState } from "../../../State/State";
+import { activeProductDetailState, ProductsState } from "../../../State/State";
 import { getRecoil, setRecoil } from 'recoil-nexus';
 
 function ProductList() {
   const [productDetailIsOpen, setProductDetailIsOpen] = useState(false);
 
-  const selectProductHandler = (id) => {
+  const selectProductHandler = (product) => {
+    setRecoil(activeProductDetailState,product)
     if (productDetailIsOpen) setProductDetailIsOpen(false);
     else setProductDetailIsOpen(true);
   };

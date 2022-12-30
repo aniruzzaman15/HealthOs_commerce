@@ -15,7 +15,7 @@ function index({products}) {
       <p className='text-[16px] font-[200]'>Pick What You Like</p>
     </div>
 
-      <div className="products-container mt-[100px] flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
+      <div className="products-container my-[100px] container mx-auto flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
       {products?.map((product) => <ProductDetail key={product.name} product={product} />)}
     </div>
     <Footer/>

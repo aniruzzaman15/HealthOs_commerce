@@ -44,7 +44,7 @@ const menusOne = () => {
             <div className="image-container">
               <img
                 src={product.product_thumbnail}
-                className="product-detail-image hover:bg-[#f02d34] rounded-[15px] bg-[#ebebeb] w-[400px] h-[400px] cursor-pointer duration-300 ease-in-out transition-all"
+                className="product-detail-image  object-cover hover:bg-[#f02d34] rounded-[15px] bg-[#ebebeb] w-[400px] h-[400px] cursor-pointer duration-300 ease-in-out transition-all"
               />
             </div>
           </div>

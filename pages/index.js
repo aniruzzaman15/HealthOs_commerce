@@ -31,7 +31,7 @@ export default function Home(props) {
       <p className='text-[16px] font-[200]'>speaker There are many variations passages</p>
     </div>
 
-    <div className="products-container flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
+    <div className="products-container flex  flex-wrap justify-center gap-[15px] mb-[50px] mt-[20px] w-full">
       {props.products?.map((product) => <ProductDetail key={product.name} product={product} />)}
     </div>
     <Footer/>

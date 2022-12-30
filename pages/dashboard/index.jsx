@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 
 
 import Image from 'next/image'
@@ -7,28 +7,32 @@ import Overview from '../../components/admin/Overview';
 import CustomerList from '../../components/admin/Customer/customerList';
 import OrderList from '../../components/admin/Order/orderList';
 import  Link  from 'next/link';
+import { sidebar } from './../../lib/data';
+import { useRouter } from 'next/router';
+import { getRecoil } from 'recoil-nexus';
+import { userState } from './../../State/State';
 
-const sidebar = [
-    { name: "Overview", icon: './icons/overview.svg',id:'overview' },
-    { name: "Products", icon: "./icons/shopping-bag.svg",id:'product_list' },
-    { name: "Customers", icon: "./icons/shopping-bag.svg",id:'customer_list' },
-    { name: "Orders", icon: "./icons/shopping-bag.svg",id:'order_list' }
 
-];
 
 function DashBoard() {
 
   const [activeComponent, setActiveComponent] = useState( { name: "Overview", icon: './icons/overview.svg',id:'overview' });
-
+  const router = useRouter()
   const selectTabHandler = (item) => {
     setActiveComponent(item)
   }
+
+  // useEffect(()=>{
+  //   if(!getRecoil(userState)){
+  //     router.push('/')
+  //   }
+  // })
 
   return (
     <div className="w-full min-h-screen font-sans text-gray-900 bg-gray-50 flex">
     <aside className="py-6 px-10 w-64 border-r border-gray-200">
       <Link href='/'>
-      <h3>HealthOs Commerce</h3>
+      <h3 className='text-[22px] text-[#191919] my-[20px]'>HOS Commerce</h3>
       </Link>
 
       {

@@ -31,3 +31,8 @@ export const uploadImageState = atom({
     key: "uploadImageState",
     default: null
 });
+
+export const activeProductDetailState = atom({
+    key: "activeProductDetailState",
+    default: null
+});
