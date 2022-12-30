@@ -1,8 +1,51 @@
-import React from "react";
+import React,{useState} from "react";
+import { checkRegexParameter } from "../../lib/data";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../../lib/utils";
+import { server } from './../../config';
 
 function SignUp() {
+
+  const [fullName, setFullName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+
+  const router
+
+  const signUpHandler = async () => {
+
+
+
+
+
+    if (!checkRegexParameter.test(phone)){
+     notify('Must be a Bangladeshi Phone No')
+     return
+    }
+
+    let result = await fetch(`${server  }/api/signup`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        phone:phone,
+        password:password,
+        full_name:fullName,
+      })
+    })
+    if(result.ok)
+
+  }
+
+
+
   return (
     <section className="bg-gray-50 ">
+      <ToastContainer />
       <div className="flex flex-col items-center  px-6 pt-[100px] mx-auto md:h-screen ">
         <a
           href="#"
@@ -15,7 +58,7 @@ function SignUp() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="/api/signup" method="post">
+            <form className="space-y-4 md:space-y-6" >
               <div>
                 <label
                   for="phone"
@@ -26,6 +69,8 @@ function SignUp() {
                 <input
                   type="text"
                   name="phone"
+                  value={phone}
+                  onChange={(e)=>setPhone(e.target.value)}
                   id="phone"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  "
                   placeholder="+880......"
@@ -43,6 +88,8 @@ function SignUp() {
                   type="text"
                   name="full_name"
                   id="full_name"
+                  value={fullName}
+                  onChange={(e)=>setFullName(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   required=""
@@ -59,28 +106,13 @@ function SignUp() {
                   type="password"
                   name="password"
                   id="password"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   required=""
                 />
               </div>
-
-              {/* <div>
-                <label
-                  for="confirm_password"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  name="confirm_password"
-                  id="confirm_password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  required=""
-                />
-              </div> */}
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
@@ -104,7 +136,8 @@ function SignUp() {
                 </div>
               </div>
               <button
-                type="submit"
+                type="button"
+                onClick={signUpHandler}
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
               >
                 Create an account
