@@ -6,6 +6,7 @@ import ProductList from '../../components/admin/Product/productList';
 import Overview from '../../components/admin/Overview';
 import CustomerList from '../../components/admin/Customer/customerList';
 import OrderList from '../../components/admin/Order/orderList';
+import  Link  from 'next/link';
 
 const sidebar = [
     { name: "Overview", icon: './icons/overview.svg',id:'overview' },
@@ -26,7 +27,10 @@ function DashBoard() {
   return (
     <div className="w-full min-h-screen font-sans text-gray-900 bg-gray-50 flex">
     <aside className="py-6 px-10 w-64 border-r border-gray-200">
+      <Link href='/'>
       <h3>HealthOs Commerce</h3>
+      </Link>
+
       {
         sidebar.map((item,index)=>{
           return (

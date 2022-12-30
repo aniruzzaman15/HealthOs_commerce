@@ -1,62 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import AddProduct from "./addProduct";
+import { ProductsState } from "../../../State/State";
+import { useRecoilValue } from 'recoil';
 
-const products = [
-  {
-    name: "Organic Landing page",
-    category: "Web Design",
-    imageUrl: "/img/organic-landing-page.png",
-    price: 20,
-    downloaded: 793,
-    rating: 4.9,
 
-    createdAt: "12/01/22",
-  },
-  {
-    name: "Traffic Landing page",
-    category: "Web Design",
-    imageUrl: "/img/traffic-landing-page.png",
-    price: 24,
-    downloaded: 34,
-    rating: 4.4,
 
-    createdAt: "10/01/22",
-  },
-  {
-    name: "POS Dashboard",
-    category: "Web Design",
-    imageUrl: "/img/pos-dashboard.png",
-    price: 16,
-    downloaded: 896,
-    rating: 4.6,
-
-    createdAt: "01/01/22",
-  },
-  {
-    name: "Gallery page",
-    category: "Web Design",
-    imageUrl: "/img/gallery-page.png",
-    price: 38,
-    downloaded: 194,
-    rating: 4.6,
-
-    createdAt: "04/01/22",
-  },
-  {
-    name: "WFH Landing page",
-    category: "Web Design",
-    imageUrl: "/img/wfh-landing-page.png",
-    price: 22,
-    downloaded: 404,
-    rating: 4.3,
-
-    createdAt: "12/12/21",
-  },
-];
-
-function ProductTable({ selectProductHandler }) {
+function ProductTable({ selectProductHandler,deleteThisProduct }) {
   const [createModal, setCreateModal] = useState(false);
+  const products = useRecoilValue(ProductsState)
 
   const createModalHandler = () => {
     console.log('hey')
@@ -108,7 +60,7 @@ function ProductTable({ selectProductHandler }) {
             return (
               <tr
                 className="hover:bg-gray-100 transition-colors group cursor-pointer"
-                onClick={() => selectProductHandler()}
+                // onClick={selectProductHandler}
                 key={index}
               >
                 <td className="flex gap-x-4 items-center py-4 pl-10">
@@ -117,32 +69,32 @@ function ProductTable({ selectProductHandler }) {
                     className="w-6 h-6 text-indigo-600 rounded-md border-gray-300"
                   />
                   <img
-                    src={product.imageUrl}
+                    src={product.product_thumbnail}
                     alt=""
                     className="w-40 aspect-[3/2] rounded-lg object-cover object-top border border-gray-200"
                   />
                   <div>
                     <a href="#" className="text-lg font-semibold text-gray-700">
-                      {product.name}
+                      {product.product_name}
                     </a>
                   </div>
                 </td>
-                <td className="font-medium text-center">${product.price}</td>
+                <td className="font-medium text-center">${product.product_price}</td>
                 <td className="font-medium text-center">
-                  {product.downloaded}
+                  23
                 </td>
 
                 <td>
                   <span className="inline-block w-20 group-hover:hidden">
-                    {product.createdAt}
+                    {product.date}
                   </span>
                   <div className="hidden group-hover:flex group-hover:w-20 group-hover:items-center group-hover:text-gray-500 group-hover:gap-x-2">
                     <button className="p-2 hover:rounded-md hover:bg-gray-200">
-                      {/* <PencilIcon className="w-6 h-6 fill-current" /> */}
+
                       <Image width={24} height={24} src={"/icons/pencil.svg"} />
                     </button>
-                    <button className="p-2 hover:rounded-md hover:bg-gray-200">
-                      {/* <TrashIcon className="w-6 h-6 fill-current" /> */}
+                    <button className="p-2 hover:rounded-md hover:bg-gray-200" onClick={()=>deleteThisProduct(product.product_id)}>
+
                       <Image width={24} height={24} src={"/icons/trash.svg"} />
                     </button>
                   </div>

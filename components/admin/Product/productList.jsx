@@ -1,37 +1,57 @@
-import React,{useState } from 'react'
+import React, { useState } from "react";
 
-import DashboardNavbar from './../DashboardNavbar';
-import ProductTable from './ProductTable';
+import DashboardNavbar from "./../DashboardNavbar";
+import ProductTable from "./ProductTable";
 
-import ProductDetail from './productDetail';
-
-
+import ProductDetail from "./productDetail";
+import connect from "./../../../lib/mongodb";
+import { server } from "./../../../config";
+import { useRecoilValue } from 'recoil';
+import { ProductsState } from "../../../State/State";
+import { getRecoil, setRecoil } from 'recoil-nexus';
 
 function ProductList() {
   const [productDetailIsOpen, setProductDetailIsOpen] = useState(false);
 
-  const selectProductHandler = () => {
-    console.log('hey')
+  const selectProductHandler = (id) => {
     if (productDetailIsOpen) setProductDetailIsOpen(false);
     else setProductDetailIsOpen(true);
   };
 
+  const deleteThisProduct = async (product_id) => {
+    let data = { product_id };
+
+    const result = await fetch(`${server}/api/removeProduct`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if(result) {
+      let products = [...getRecoil(ProductsState)]
+      products = products.filter((product)=>product.product_id !== product_id)
+      setRecoil(ProductsState, products)
+    }
+
+
+  };
+
   return (
     <>
-    <DashboardNavbar/>
-    <div className="mt-5">
+      <DashboardNavbar />
+      <div className="mt-5">
         {!productDetailIsOpen && (
-          <ProductTable selectProductHandler={selectProductHandler} />
+          <ProductTable
+            deleteThisProduct={deleteThisProduct}
+            selectProductHandler={selectProductHandler}
+          />
         )}
         {productDetailIsOpen && (
           <ProductDetail selectProductHandler={selectProductHandler} />
         )}
-
-    </div>
-
-
+      </div>
     </>
-  )
+  );
 }
 
-export default ProductList
+export default ProductList;
