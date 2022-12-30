@@ -78,3 +78,11 @@ export default function Home() {
     </>
   )
 }
+
+export async function getServerSideProps(){
+
+  const response = await fetch('/products')
+  const data = await response.json()
+  console.log('data',data)
+
+}

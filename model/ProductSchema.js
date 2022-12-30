@@ -15,9 +15,14 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    dateTime:{
+    date:{
         type:String,
-
+    },
+    product_qty:{
+        type:String,
+    },
+    product_id:{
+        type:String,
     }
 })
 
