@@ -1,6 +1,6 @@
 import React, { useRef, useState,useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
+import {AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useRecoilState } from 'recoil';
 import { cartIsOpenState } from '../../State/State';
