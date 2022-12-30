@@ -10,7 +10,12 @@ function index({products}) {
   return (
     <div>
       <Navbar/>
-      <div className="products-container flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
+      <div className="text-center my-[40px] mx-[0] text-[#324d67]">
+      <h2 className='text-[40px] font-extrabold'>Products</h2>
+      <p className='text-[16px] font-[200]'>Pick What You Like</p>
+    </div>
+
+      <div className="products-container mt-[100px] flex flex-wrap justify-center gap-[15px] mt-[20px] w-full">
       {products?.map((product) => <ProductDetail key={product.name} product={product} />)}
     </div>
     <Footer/>
