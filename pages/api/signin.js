@@ -9,9 +9,9 @@ export default async function handler(req,res){
     const user = await User.findOne({phone,password})
     console.log('got you', user)
     if(!user){
-        return res.json({status:'Not able to find the user'})
+        res.status(401).json({status:"Customer doesn't exist"})
     }
     else{
-        res.redirect('/dashboard')
+        res.status(200).json({status:'Successfully Signed in',data:user})
     }
 }

@@ -1,8 +1,7 @@
 import React,{useState} from "react";
 import { checkRegexParameter } from "../../lib/data";
+import passwordHash from 'password-hash';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { notify } from "../../lib/utils";
 import { server } from './../../config';
 import { useRouter } from 'next/router';
@@ -16,6 +15,7 @@ function SignUp() {
   const router = useRouter()
 
   const signUpHandler = async () => {
+    // var hashedPassword = passwordHash.generate(password);
 
     if (!checkRegexParameter.test(phone)){
      notify('Must be a Bangladeshi Phone No')
@@ -43,7 +43,7 @@ function SignUp() {
         full_name:fullName,
       })
     })
-    if(result.ok) router.push(`${server}/api/signin`)
+    if(result.ok) router.push(`${server}/signin`)
 
   }
 
@@ -51,7 +51,6 @@ function SignUp() {
 
   return (
     <section className="bg-gray-50 ">
-      <ToastContainer />
       <div className="flex flex-col items-center  px-6 pt-[100px] mx-auto md:h-screen ">
         <a
           href="#"
